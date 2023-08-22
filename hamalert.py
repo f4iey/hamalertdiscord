@@ -1,13 +1,14 @@
 import telnetlib
 import json
 import requests
+import os
 
 # Replace with your HamAlert username and password
-HAMALERT_USERNAME = "USERNAME"
-HAMALERT_PASSWORD = "PASSWORD"
+HAMALERT_USERNAME = os.getenv('HAMALERT_USERNAME', 'N0CALL')
+HAMALERT_PASSWORD = os.getenv('HAMALERT_PASSWORD', 'S53CRET')
 
 # Replace with your Discord webhook URL
-DISCORD_WEBHOOK_URL = "INSERT DISCORD WEBHOOK HERE"
+DISCORD_WEBHOOK_URL = os.getenv('HAMALERT_WEBHOOK_URL', 'DS3ORD')
 
 def send_discord_webhook(content):
     data = {"content": content}
@@ -61,5 +62,7 @@ if __name__ == "__main__":
     # HAM ALERT TELNET INFORMATION
     HOST = "hamalert.org"
     PORT = 7300
-
+    if HAMALERT_USERNAME == "N0CALL" or HAMALERT_PASSWORD == "S53CRET" or DISCORD_WEBHOOK_URL == "DS3ORD":
+        print("\033[91mERROR: You need to set envvars first!\033[0m")
+        exit(1)
     telnet_listener(HOST, PORT, HAMALERT_USERNAME, HAMALERT_PASSWORD)
