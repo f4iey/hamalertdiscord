@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  hamalert:
+    container_name: hamalert
+    build: .
+    environment:
+      - HAMALERT_USERNAME=N0CALL
+      - HAMALERT_PASSWORD=S53CRET
+      - DISCORD_WEBHOOK_URL=DS3ORD
