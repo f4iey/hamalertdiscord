@@ -2,6 +2,7 @@ import telnetlib
 import json
 import requests
 import os
+import time
 
 # Replace with your HamAlert username and password
 HAMALERT_USERNAME = os.getenv('HAMALERT_USERNAME', 'N0CALL')
@@ -43,7 +44,8 @@ def telnet_listener(host, port, username, password):
 
                     # Construct the message for Discord webhook
                     message = f"DX de {source_call} @ {timestamp}\n"
-                    message += f"{frequency} on {destination_call}"
+                    message += f"{frequency} on **{destination_call}** "
+                    message += "<t:" + str(time.time()).split('.')[0] + ":R>"
 
                     send_discord_webhook(message)
                 else:
