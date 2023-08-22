@@ -1,31 +1,47 @@
 # HAM Alert Discord Integration
-HamAlerts to Discord Webook
+HamAlerts to Discord Webook Using Docker
 
+## Hamalert Trigger
+Before doing anything, connect to your hamalert account and create a trigger on https://hamalert.org and have it action "Telnet"
 
-Using an Ubuntu Linux Machine follow the below steps:
+## Creating a discord webhook
+To get the app running, you'll need to create a specific webhook and use a link.
 
-----------------------------------------------------------------------------------------------------
-To Set up Telnet and Discord Connections:
-1. Create trigger on https://hamalert.org and have it action "Telnet"
-2. Create a linux machine and install python3
-   sudo apt install python3-pip
-   pip install requests
-3. Create your python file and copy the information from hamalert.py
-4. Edit HAMALERT USERNAME, PASSWORD, and DISCORD WEBHOOK to be your information
-5. Run Command: "nohup python3 hamalert.py &" (Use this command so the script stays running after you close your CLI session)
-6. Enjoy!
-
-----------------------------------------------------------------------------------------------------
 To create a discord webhook follow the below instructions:
 1. Server Settings
 2. Integrations
 3. Webooks
 4. New Webhook
 5. Change Name to anything you desire and set channel to where you want spots to output
-6. Copy the URL and paste into your hamalert.py
+6. Copy the URL to set `HAMALERT_WEBHOOK_URL` variable in the `Dockerfile`
+
+## Build Image
+To build the Docker image and get the app up and running, first edit the 3 environment varbaibles in the `Dockerfile` to match your hamalert credentials and your discord webhook integration.
+```sh
+git clone https://github.dev/f4iey/hamalertdiscord
+docker build -t hamalert .
+```
+You can then run it with:
+```sh
+docker run hamalert
+```
+### Using docker compose
+Instead of this, you can also have these instructions in a new or existing compose file, replacing the environment variables:
+```yml
+services:
+  hamalert:
+    container_name: hamalert
+    build: .
+    environment:
+      - HAMALERT_USERNAME=N0CALL
+      - HAMALERT_PASSWORD=S53CRET
+      - HAMALERT_WEBHOOK_URL=DS3ORD
+```
+If used in an existing compose file, make sure to set the correct file path to the `Dockerfile` in the `build:` field and deploy using `docker compose up -d`
+
+
+
 
 ----------------------------------------------------------------------------------------------------
 
-Created by W2ORT
-Matthew O.
-https://w2ort.com
+Created by W2ORT, forked by F4IEY
