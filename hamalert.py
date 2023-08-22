@@ -43,8 +43,8 @@ def telnet_listener(host, port, username, password):
                     timestamp = pieces[-1]
 
                     # Construct the message for Discord webhook
-                    message = f"DX de {source_call} @ {timestamp}\n"
-                    message += f"{frequency} on **{destination_call}** "
+                    message = f"DX de {source_call}: "
+                    message += f"**{frequency}** on {destination_call} "
                     message += "<t:" + str(time.time()).split('.')[0] + ":R>"
 
                     send_discord_webhook(message)
