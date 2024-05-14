@@ -14,4 +14,4 @@ def get(user, password):
     headers = {'Content-type': 'application/json'}
     response = requests.get(url, headers=headers, params={"ownerName": f"{user.lower()}"}, auth=(user, password))
     strout = response.json()
-    return strout["text"]
+    return strout[-1]["text"]
