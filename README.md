@@ -36,6 +36,9 @@ services:
       - HAMALERT_USERNAME=N0CALL
       - HAMALERT_PASSWORD=S53CRET
       - HAMALERT_WEBHOOK_URL=DS3ORD
+      - DAPNET_ENABLE=0
+      - DAPNET_USER=PA6ER
+      - DAPNET_PASSWORD=CY4HER
 ```
 If used in an existing compose file, make sure to set the correct file path to the `Dockerfile` in the `build:` field and deploy using `docker compose up -d`
 

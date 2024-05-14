@@ -5,10 +5,16 @@ import json
 import requests
 import logging
 import os
+import dapnet
 
 # Replace with your HamAlert username and password
 HAMALERT_USERNAME = os.getenv('HAMALERT_USERNAME', 'N0CALL')
 HAMALERT_PASSWORD = os.getenv('HAMALERT_PASSWORD', 'S53CRET')
+
+# If using dapnet
+DAPNET_ENABLE = os.getenv('DAPNET_ENABLE', '0')
+DAPNET_USER = os.getenv('DAPNET_USER', 'PA6ER')
+DAPNET_PASSWORD = os.getenv('DAPNET_PASSWORD', 'CY4HER')
 
 # Replace with your Discord webhook URL
 DISCORD_WEBHOOK_URL = os.getenv('HAMALERT_WEBHOOK_URL', 'DS3ORD')
@@ -72,6 +78,10 @@ def telnet_listener(host, port, username, password):
                         if all(key in data_dict for key in sota_fields):
                             message = "SOTA " + message
                             message += f"\nSummit: {data_dict['summitName']} -- {data_dict['summitRef']} -- a {data_dict['summitPoints']} point summit at {data_dict['summitHeight']}m elevation!"
+                        # Message for DAPNET
+                        if DAPNET_ENABLE != '0':
+                            dapnet_message = f"DX de {data_dict['spotter']}: {data_dict['callsign']} on {data_dict['frequency']} ({data_dict['mode']})"
+                            dapnet.send(DAPNET_USER, DAPNET_PASSWORD, dapnet_message, DAPNET_USER) # shall be changed in the future by a callsign list
 
                     else:
                         logging.warning("Received data is not in the expected format. Skipping.")
@@ -111,4 +121,5 @@ if __name__ == "__main__":
     if HAMALERT_USERNAME == "N0CALL" or HAMALERT_PASSWORD == "S53CRET" or DISCORD_WEBHOOK_URL == "DS3ORD":
         print("\033[91mERROR: You need to set envvars first!\033[0m")
         exit(1)
+
     telnet_listener(HOST, PORT, HAMALERT_USERNAME, HAMALERT_PASSWORD)
