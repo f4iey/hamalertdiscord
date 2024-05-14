@@ -25,22 +25,18 @@ You can then run it with:
 ```sh
 docker run hamalert
 ```
-### Using docker compose
+### Using docker compose prebuilt image
 Instead of this, you can also have these instructions in a new or existing compose file, replacing the environment variables:
 ```yml
 services:
   hamalert:
     container_name: hamalert
-    build: .
+    image: ghcr.io/f4iey/hamalertdiscord:main
     environment:
       - HAMALERT_USERNAME=N0CALL
       - HAMALERT_PASSWORD=S53CRET
       - HAMALERT_WEBHOOK_URL=DS3ORD
 ```
-If used in an existing compose file, make sure to set the correct file path to the `Dockerfile` in the `build:` field and deploy using `docker compose up -d`
-
-
-
 
 ----------------------------------------------------------------------------------------------------
 
