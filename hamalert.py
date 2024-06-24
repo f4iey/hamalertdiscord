@@ -4,10 +4,7 @@ import time
 import json
 import requests
 import logging
-<<<<<<< HEAD
 import os
-=======
->>>>>>> upstream/main
 
 # Replace with your HamAlert username and password
 HAMALERT_USERNAME = os.getenv('HAMALERT_USERNAME', 'N0CALL')
