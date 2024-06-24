@@ -66,7 +66,7 @@ def telnet_listener(host, port, username, password):
                 try:
                     data_dict = json.loads(data)
 
-                    required_fields = {'fullCallsign', 'callsign', 'frequency', 'mode', 'spotter', 'source'}
+                    required_fields = {'fullCallsign', 'callsign', 'frequency', 'mode', 'spotter', 'time', 'source'}
                     # Ensure that the data has enough pieces to extract relevant information
                     if all(key in data_dict for key in required_fields):
                         # Construct the message for Discord webhook
