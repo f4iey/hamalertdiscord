@@ -5,7 +5,6 @@ HamAlerts to Discord Webook Using Docker
 Before doing anything, connect to your hamalert account and create a trigger on https://hamalert.org and have it action "Telnet"
 
 ## Creating a discord webhook
-To get the app running, you'll need to create a specific webhook and use a link.
 
 To create a discord webhook follow the below instructions:
 1. Server Settings
@@ -41,9 +40,15 @@ services:
       - DAPNET_PASSWORD=CY4HER
 ```
 
-
-
-
 ----------------------------------------------------------------------------------------------------
 
 Created by W2ORT, forked by F4IEY
+Matthew O.
+https://w2ort.com
+
+Updated and heavily corrected by:
+Dylon N6MX
+Devin KN6PHZ
+
+Special Thanks to:
+Mark KD7DTS and the W6TRW Club!
