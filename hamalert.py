@@ -87,7 +87,7 @@ def telnet_listener(host, port, username, password):
     except ConnectionRefusedError:
         logging.error("Telnet connection refused. Make sure the server is running and reachable.")
     except Exception as e:
-        logging.error("An error occurred:", e)
+        logging.error("An error occurred: %s", str(e))
 
 def setup_args():
     # Create an argument parser
