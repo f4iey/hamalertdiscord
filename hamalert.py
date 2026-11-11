@@ -170,7 +170,7 @@ def build_message(d: dict) -> Optional[Tuple[str, str, str, str]]:
     else:
         time_text = str(spot_time) if spot_time else "?"
 
-    message = f"SPOT: {callsign} seen by {spotter} on {frequency_text} ({mode}, {band}) at {time_text} UTC"
+    message = f"DX de {spotter}: **{callsign}** on {frequency_text} ({mode}) <t:{str(time.time()).split('.')[0]}:R>"
     sota_fields = {"summitName", "summitRef", "summitPoints", "summitHeight"}
     if sota_fields.issubset(d.keys()):
         message = "SOTA " + message
