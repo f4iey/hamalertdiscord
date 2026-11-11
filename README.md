@@ -24,17 +24,20 @@ You can then run it with:
 ```sh
 docker run hamalert
 ```
-### Using docker compose prebuilt image
-Instead of this, you can also have these instructions in a new or existing compose file, replacing the environment variables:
+## Run with docker compose
+Instead of this, you can also have these instructions in a new or existing compose file, replacing the environment variables, using the prebuilt image:
 ```yml
 services:
   hamalert:
     container_name: hamalert
-    image: ghcr.io/f4iey/hamalertdiscord:main
+    image: ghcr.io/f4iey/hamalertdiscord:feature-dapnet
     environment:
       - HAMALERT_USERNAME=N0CALL
       - HAMALERT_PASSWORD=S53CRET
       - HAMALERT_WEBHOOK_URL=DS3ORD
+      - DAPNET_ENABLE=0
+      - DAPNET_USER=PA6ER
+      - DAPNET_PASSWORD=CY4HER
 ```
 
 ----------------------------------------------------------------------------------------------------
