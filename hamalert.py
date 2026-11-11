@@ -171,7 +171,7 @@ def build_message(d: dict) -> Optional[Tuple[str, str, str, str]]:
     else:
         time_str = str(t) if t else "?"
 
-    base = f"SPOT: {callsign} seen by {spotter} on {freq_txt} ({mode}, {band}) at {time_str} UTC"
+    base = f"DX de {spotter}: **{callsign}** on {freq_txt} ({mode}) <t:{str(time.time()).split('.')[0]}:R>"
 
     # SOTA extras if present
     sota_fields = {"summitName", "summitRef", "summitPoints", "summitHeight"}
