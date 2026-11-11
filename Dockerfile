@@ -5,10 +5,12 @@ WORKDIR /usr/src/hamalert
 COPY hamalert.py ./
 COPY dapnet.py ./
 RUN pip install --no-cache-dir requests
+ENV HAMALERT_HOST="hamalert.org"
+ENV HAMALERT_PORT="7300"
 ENV HAMALERT_USERNAME="N0CALL"
 ENV HAMALERT_PASSWORD="S53CRET"
-ENV HAMALERT_WEBHOOK_URL="DS3ORD"
-# DAPNET, disabled by default with 0
+ENV DISCORD_WEBHOOK_URL="DS3ORD"
+# DAPNET is disabled by default.
 ENV DAPNET_ENABLE="0"
 ENV DAPNET_USER="PA6ER"
 ENV DAPNET_PASSWORD="CY4HER"
