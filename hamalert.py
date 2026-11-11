@@ -86,7 +86,6 @@ def extract_band(payload: dict) -> str:
     mhz = _parse_mhz(get_first(payload, "frequency", "freq", "frequencyMHz", "frequencyKhz"))
     return _band_from_mhz(mhz) if mhz is not None else "unknown"
 
-
 # -------- Discord --------
 def send_discord_webhook(content: str) -> bool:
     if DRY_RUN:
