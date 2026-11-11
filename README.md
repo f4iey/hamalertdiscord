@@ -1,48 +1,47 @@
 # HAM Alert Discord Integration
-HamAlerts to Discord Webook Using Docker
+HamAlerts to Discord Webhook with optional DAPNET delivery.
 
-## Hamalert Trigger
-Before doing anything, connect to your hamalert account and create a trigger on https://hamalert.org and have it action "Telnet"
+## HamAlert trigger
+Create a trigger in your [HamAlert account](https://hamalert.org) and set its action to **Telnet**.
 
-## Creating a discord webhook
+## Discord webhook
+Create a Discord webhook under **Server Settings → Integrations → Webhooks**, then copy its URL for `DISCORD_WEBHOOK_URL`.
 
-To create a discord webhook follow the below instructions:
-1. Server Settings
-2. Integrations
-3. Webooks
-4. New Webhook
-5. Change Name to anything you desire and set channel to where you want spots to output
-6. Copy the URL to set `HAMALERT_WEBHOOK_URL` variable in the `Dockerfile`
+## Run with Docker Compose
+Copy `docker-compose.yml.sample` to `docker-compose.yml` and replace the example values with your credentials and webhook URL. DAPNET delivery is disabled by default; set `DAPNET_ENABLE=1` to enable it and provide your DAPNET account credentials.
 
-## Build Image
-To build the Docker image and get the app up and running, first edit the 3 environment varbaibles in the `Dockerfile` to match your hamalert credentials and your discord webhook integration.
-```sh
-git clone https://github.dev/f4iey/hamalertdiscord
-docker build -t hamalert .
-```
-You can then run it with:
-```sh
-docker run hamalert
-```
-## Run with docker compose
-Instead of this, you can also have these instructions in a new or existing compose file, replacing the environment variables, using the prebuilt image:
-```yml
+```yaml
 services:
   hamalert:
     container_name: hamalert
-    image: ghcr.io/f4iey/hamalertdiscord:feature-dapnet
+    build: .
     environment:
+      - HAMALERT_HOST=hamalert.org
+      - HAMALERT_PORT=7300
       - HAMALERT_USERNAME=N0CALL
       - HAMALERT_PASSWORD=S53CRET
-      - HAMALERT_WEBHOOK_URL=DS3ORD
+      - DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/your-webhook
       - DAPNET_ENABLE=0
       - DAPNET_USER=PA6ER
       - DAPNET_PASSWORD=CY4HER
 ```
 
-----------------------------------------------------------------------------------------------------
+Build and start the service with:
 
-Created by W2ORT, forked by F4IEY
+```sh
+docker compose up --build -d
+```
+
+To enable DAPNET, change `DAPNET_ENABLE` to `1`. The DAPNET account configured by `DAPNET_USER` and `DAPNET_PASSWORD` is used for authentication and as the destination callsign.
+
+## Run directly with Python
+Install `requests`, set the same environment variables shown above, then run:
+
+```sh
+python hamalert.py
+```
+
+Created by W2ORT, forked by F4IEY.
 Matthew O.
 https://w2ort.com
 
