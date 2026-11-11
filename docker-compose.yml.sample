@@ -4,9 +4,11 @@ services:
     container_name: hamalert
     build: .
     environment:
+      - HAMALERT_HOST=hamalert.org
+      - HAMALERT_PORT=7300
       - HAMALERT_USERNAME=N0CALL
       - HAMALERT_PASSWORD=S53CRET
-      - HAMALERT_WEBHOOK_URL=DS3ORD
+      - DISCORD_WEBHOOK_URL=DS3ORD
       - DAPNET_ENABLE=0
       - DAPNET_USER=PA6ER
       - DAPNET_PASSWORD=CY4HER
